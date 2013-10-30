@@ -32,6 +32,16 @@
                 target-dir="src/com/adobe/plugins" />
         <source-file src="src/android/libGoogleAnalyticsV2.jar"
                 target-dir="libs" />
+                
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <!-- Used for install referral measurement-->
+            <service android:name="com.google.analytics.tracking.android.CampaignTrackingService"/>
+            <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
+              <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+              </intent-filter>
+            </receiver>
+        </config-file>
     </platform>
 
     <platform name="ios">
